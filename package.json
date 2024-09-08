@@ -26,12 +26,9 @@
     "bin": {
         "block-notify": "./scripts/blockNotify.js"
     },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/zone117x/node-open-mining-portal.git"
-    },
     "dependencies": {
         "stratum-pool": "https://github.com/zone117x/node-stratum-pool.git",
+        "node-multi-hashing": "https://github.com/zone117x/node-open-mining-portal.git",
         "dateformat": "1.0.12",
         "node-json-minify": "*",
         "redis": "0.12.1",
