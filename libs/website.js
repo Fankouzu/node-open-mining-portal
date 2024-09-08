@@ -160,16 +160,23 @@ module.exports = function(logger){
                     var daemon = new Stratum.daemon.interface([coinInfo.daemon], function(severity, message){
                         logger[severity](logSystem, c, message);
                     });
-                    daemon.cmd('dumpprivkey', [coinInfo.address], function(result){
+                    daemon.cmd('getaddressinfo', [coinInfo.address], function(result){
                         if (result[0].error){
-                            logger.error(logSystem, c, 'Could not dumpprivkey for ' + c + ' ' + JSON.stringify(result[0].error));
+                            logger.error(logSystem, c, '无法获取 ' + c + ' 的地址信息 ' + JSON.stringify(result[0].error));
                             cback();
                             return;
                         }
-
+                    
+                        var addressInfo = result[0].response;
+                        if (!addressInfo.ismine) {
+                            logger.error(logSystem, c, '地址不属于钱包: ' + coinInfo.address);
+                            cback();
+                            return;
+                        }
+                    
                         var vBytePub = util.getVersionByte(coinInfo.address)[0];
-                        var vBytePriv = util.getVersionByte(result[0].response)[0];
-
+                        var vBytePriv = addressInfo.isscript ? 0xc4 : 0x80; // 为 P2SH 或 P2PKH 使用适当的版本字节
+                    
                         coinBytes[c] = vBytePub.toString() + ',' + vBytePriv.toString();
                         coinsForRedis[c] = coinBytes[c];
                         cback();
