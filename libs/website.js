@@ -3,7 +3,6 @@ var fs = require('fs');
 var path = require('path');
 
 var async = require('async');
-var watch = require('node-watch');
 var redis = require('redis');
 
 var dot = require('dot');
