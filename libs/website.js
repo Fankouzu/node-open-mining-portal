@@ -15,7 +15,7 @@ var Stratum = require('stratum-pool');
 var util = require('stratum-pool/lib/util.js');
 
 var api = require('./api.js');
-
+var chokidar = require('chokidar');
 
 module.exports = function(logger){
 
@@ -95,7 +95,18 @@ module.exports = function(logger){
 
 
     //If an html file was changed reload it
-    watch('website', function(filename){
+    // watch('website', function(filename){
+    //     var basename = path.basename(filename);
+    //     if (basename in pageFiles){
+    //         console.log(filename);
+    //         readPageFiles([basename]);
+    //         logger.debug(logSystem, 'Server', 'Reloaded file ' + basename);
+    //     }
+    // });
+    chokidar.watch('website', {
+        ignored: /(^|[\/\\])\../,
+        persistent: true
+    }).on('change', function(filename) {
         var basename = path.basename(filename);
         if (basename in pageFiles){
             console.log(filename);
