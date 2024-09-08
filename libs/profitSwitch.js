@@ -1,6 +1,6 @@
 var async  = require('async');
 var net    = require('net');
-var bignum = require('bignum');
+// var bignum = require('bignum');
 var algos  = require('stratum-pool/lib/algoProperties.js');
 var util   = require('stratum-pool/lib/util.js');
 

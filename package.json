@@ -45,7 +45,6 @@
         "chokidar": "^3.5.3",
         "request": "2.69.0",
         "nonce": "*",
-        "bignum": "0.13.1",
         "extend": "*"
     },
     "engines": {
