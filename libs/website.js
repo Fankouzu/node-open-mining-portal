@@ -184,10 +184,10 @@ module.exports = function(logger){
                             return;
                         }
                     
-                        var vBytePub = util.getVersionByte(coinInfo.address)[0];
-                        var vBytePriv = addressInfo.isscript ? 0xc4 : 0x80; // 为 P2SH 或 P2PKH 使用适当的版本字节
+                        var vBytePub = coinInfo.address.charAt(0) === '1' ? '00' : '05';
+                        var vBytePriv = addressInfo.isscript ? 'c4' : '80';
                     
-                        coinBytes[c] = vBytePub.toString() + ',' + vBytePriv.toString();
+                        coinBytes[c] = vBytePub + ',' + vBytePriv;
                         coinsForRedis[c] = coinBytes[c];
                         cback();
                     });
