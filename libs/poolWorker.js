@@ -1,4 +1,4 @@
-var Stratum = require('stratum-pool');
+var Stratum = require('stratum-pool-taproot');
 var redis   = require('redis');
 var net     = require('net');
 
