@@ -186,7 +186,7 @@ module.exports = function(logger){
                     
                         var vBytePub = coinInfo.address.charAt(0) === '1' ? '00' : '05';
                         var vBytePriv = addressInfo.isscript ? 'c4' : '80';
-                    
+                        
                         coinBytes[c] = vBytePub + ',' + vBytePriv;
                         coinsForRedis[c] = coinBytes[c];
                         cback();
